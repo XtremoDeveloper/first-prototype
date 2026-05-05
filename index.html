@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema Web Inteligente de Gestión de Ventas Multinegocio con Firebase para Pequeñas Empresas</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f1f3f6;
+            margin: 0;
+        }
+        
+        header {
+            background: #0d6efd;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+        }
+        
+        .container {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+        
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            background: #0d6efd;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #0b5ed7;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        li {
+            background: #f8f9fa;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>💻 Sistema Básico de Gestión de Ventas e Inventario para Negocios</header>
+
+    <div class="container">
+
+        <div class="card">
+            <h3>Login</h3>
+            <input type="email" id="email" placeholder="Correo">
+            <input type="password" id="password" placeholder="Contraseña">
+            <button onclick="login()">Ingresar</button>
+        </div>
+
+        <div class="card">
+            <h3>Registrar Producto</h3>
+            <input type="text" id="nombre" placeholder="Nombre">
+            <input type="number" id="precio" placeholder="Precio">
+            <input type="number" id="stock" placeholder="Stock">
+
+            <select id="tipoNegocio">
+<option value="ropa">Ropa</option>
+<option value="abarrotes">Abarrotes</option>
+<option value="restaurante">Restaurante</option>
+</select>
+
+            <button onclick="guardarProducto()">Guardar</button>
+        </div>
+
+        <div class="card">
+            <h3>Ventas</h3>
+            <input type="text" id="productoVenta" placeholder="Producto">
+            <input type="number" id="cantidadVenta" placeholder="Cantidad">
+            <button onclick="vender()">Vender</button>
+        </div>
+
+        <div class="card">
+            <h3>Total Ganado</h3>
+            <h2 id="totalGanado">S/ 0</h2>
+        </div>
+
+        <div class="card">
+            <h3>Productos</h3>
+            <button onclick="eliminarProducto('${id}')">Eliminar</button>
+            <ul id="lista"></ul>
+        </div>
+
+        <div class="card">
+            <h3>Historial</h3>
+            <ul id="historial"></ul>
+        </div>
+
+        <div class="card">
+            <h3>Ventas por Producto</h3>
+            <canvas id="graficoVentas"></canvas>
+        </div>
+
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="app.js"></script>
+
+
+    <button onclick="location.href='ParaQue....html'">Abrir Página</button>
+</body>
+
+</html>
