@@ -156,65 +156,72 @@ db.ref("ventas").on("value", snapshot => {
 });
 
 
-import { getFirestore, doc, deleteDoc } from "firebase/firestore";
+let chartDias;
 
-const db = getFirestore();
+db.ref("ventas").on("value", snapshot => {
 
-async function eliminarProducto(id) {
-    try {
-        await deleteDoc(doc(db, "productos", id));
-        alert("Producto eliminado correctamente");
-    } catch (error) {
-        console.error("Error al eliminar:", error);
-        alert("Error al eliminar producto");
-    }
-}
+    let dias = {};
 
+    snapshot.forEach(item => {
+        let v = item.val();
 
-async function eliminarProducto(id) {
-    const confirmacion = confirm("¿Seguro que deseas eliminar este producto?");
-    
-    if (!confirmacion) return;
+        let fecha = v.fecha.split(",")[0]; // solo fecha
 
-    try {
-        await deleteDoc(doc(db, "productos", id));
-        alert("Producto eliminado correctamente");
-    } catch (error) {
-        console.error(error);
-        alert("Error al eliminar");
-    }
-}
+        if (!dias[fecha]) {
+            dias[fecha] = 0;
+        }
 
-cargarProductos();
+        dias[fecha] += v.total;
+    });
 
+    let labels = Object.keys(dias);
+    let datos = Object.values(dias);
 
+    let ctx = document.getElementById("graficoDias").getContext("2d");
 
+    if (chartDias) chartDias.destroy();
 
+    chartDias = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Ventas por día",
+                data: datos
+            }]
+        }
+    });
 
+});
 
+let chartPastel;
 
+db.ref("ventas").on("value", snapshot => {
 
+    let productos = {};
 
+    snapshot.forEach(item => {
+        let v = item.val();
 
+        if (!productos[v.producto]) {
+            productos[v.producto] = 0;
+        }
 
+        productos[v.producto] += v.total;
+    });
 
+    let ctx = document.getElementById("graficoPastel").getContext("2d");
 
+    if (chartPastel) chartPastel.destroy();
 
+    chartPastel = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: Object.keys(productos),
+            datasets: [{
+                data: Object.values(productos)
+            }]
+        }
+    });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+});
