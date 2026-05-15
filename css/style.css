@@ -9,7 +9,6 @@ body {
     font-family: Arial, sans-serif;
     background: #f4f6f9;
     color: #333;
-    display: flex;
     min-height: 100vh;
 }
 
@@ -191,4 +190,22 @@ canvas {
 
 .logo-panel h2 {
     font-size: 22px;
+}
+
+.login-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-card {
+    width: 400px;
+    max-width: 90%;
+}
+
+body.login-page {
+    display: block;
 }
